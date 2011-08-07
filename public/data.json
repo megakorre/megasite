@@ -1,0 +1,21 @@
+{
+  "VERSION": "0.0.1",
+  
+  "stuff": {
+    "":             "Home",
+    "usefull_sites": "Usefull Sites"},
+
+  "usefull_sites": [
+  
+  { "name": "Backbone.js",
+    "href": "http://documentcloud.github.com/backbone/",
+    "description": 
+      "A nice libary for single page applications i use its routing stuff for this page"},
+  
+  
+  
+  { "name": "Stackoverflow",
+    "href": "http://stackoverflow.com/",
+    "description": 
+      "questions and answer site for programmers im a member off"}]
+}
