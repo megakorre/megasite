@@ -12,7 +12,10 @@
     "description": 
       "A nice libary for single page applications i use its routing stuff for this page"},
   
-  
+  { "name": "websequencediagrams", 
+    "href": "http://www.websequencediagrams.com/",
+    "description": 
+      "You can make nice diagrams and get images you can embed into a page.... realy nice :D"},
   
   { "name": "Stackoverflow",
     "href": "http://stackoverflow.com/",
