@@ -1,5 +1,14 @@
 (function() {
   
+  Object.keys = Object.keys || function (o){
+    var r = [];
+    for (key in o) {
+      o.hasOwnProperty(key) && r.push(key);
+    }
+    return r;
+  };
+  
+  
   $.fn.clearAndAdd = function(item) {
     $(this).html("").append(item);
   };
