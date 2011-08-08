@@ -1,14 +1,13 @@
 (function() {
   
-  Object.keys = Object.keys || function (o){
+  Object.keys = Object.keys || function (o) {
     var r = [];
     for (key in o) {
       o.hasOwnProperty(key) && r.push(key);
     }
     return r;
   };
-  
-  
+    
   $.fn.clearAndAdd = function(item) {
     $(this).html("").append(item);
   };
@@ -48,7 +47,6 @@
               .attr("href", item.href),
               $("<p />").text(item.description)));
     });
-    
     return ul;
   };
 
@@ -71,47 +69,47 @@
     },
     
     page: function(page) {
-      var item = page;
       withAppData(function(data) {
-        log(item);        
-        if(data[item] === undefined) {
-         $("#content-bar").html("").append($("#item-404").clone());
+        if(data[page] === undefined) {
+          $("#content-bar").clearAndAdd(
+            $("#item-404").clone());
         } else {
-         var page = renderPage(data[item]);
-         $("#content-bar").html("").append(page);
+          var pageEl = renderPage(data[page]);
+          $("#content-bar").html("").append(pageEl);
         }
       });
     }
   });
   
-  
-  
-  var createPageMover = function(page, appRouter) {
+  var withNoDefaults = function(f) {
     return function(event) {
-      event.preventDefault();
-      appRouter.navigate(page, { triggerRoute: true });
+      event.preventDefault && event.preventDefault();
+      call(f);
       return false;
     };
   };
-  
+    
   $(function() {
     var appRouter = new AppRouter();
     Backbone.history.start({ pushState: false });
     
-    withAppData(function(data) {
-      Object.keys(data.stuff).forEach(function(key) {
-        var link = $("<a href='#' />")
-          .text(data.stuff[key])
-          .click(createPageMover(key, appRouter));
-        $("<li />").append(link).appendTo("#internal-links");
-      });
+    var historyNavigator = function(path) {
+      return function() {
+        appRouter.navigate(path, { triggerRoute: true });        
+      };
+    };
+    
+    withAppData(function(data) {      
+      $.fn.append.apply($("#internal-links"), _.map(Object.keys(data.stuff), function(key) {
+        return $("<li />").append(
+          $("<a href='#' />")
+            .text(data.stuff[key])
+            .click(withNoDefaults(historyNavigator(key))));
+      }));
     });
     
-    $("#show-music").click(function(event) {
-      event.preventDefault();
-      appRouter.navigate("music", { triggerRoute: true });
-      return false;
-    });
+    $("#show-music").click(
+      withNoDefaults(historyNavigator("music")));
   });  
 } ());
 
