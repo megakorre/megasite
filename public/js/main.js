@@ -1,5 +1,9 @@
 (function() {
   
+  $.fn.clearAndAdd = function(item) {
+    $(this).html("").append(item);
+  };
+  
   var log = function() {
     console.log.apply(console, arguments);
   };
@@ -7,7 +11,6 @@
   var call = function(f) {
     return f();
   };
-
 
   var withAppData = call(function() {
     var cach = null;
@@ -40,6 +43,8 @@
     return ul;
   };
 
+  
+
   var AppRouter = Backbone.Router.extend({
 
     routes: {
@@ -49,11 +54,11 @@
     },
     
     home: function() {
-      $("#content-bar").html("").append($("#home-screen").clone());
+      $("#content-bar").clearAndAdd($("#home-screen").clone());
     },
     
     music: function() {
-      $("#content-bar").html("").append($("#music-screen").clone());
+      $("#content-bar").clearAndAdd($("#music-screen").clone());
     },
     
     page: function(page) {
@@ -69,6 +74,7 @@
       });
     }
   });
+  
   
   
   var createPageMover = function(page, appRouter) {

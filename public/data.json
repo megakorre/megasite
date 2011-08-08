@@ -2,7 +2,8 @@
   "VERSION": "0.0.1",
   
   "stuff": {
-    "":             "Home",
+    "":              "Home",
+    "screen_casts":  "Interesting Talks",
     "usefull_sites": "Usefull Sites"},
 
   "usefull_sites": [
@@ -20,5 +21,13 @@
   { "name": "Stackoverflow",
     "href": "http://stackoverflow.com/",
     "description": 
-      "questions and answer site for programmers im a member off"}]
+      "questions and answer site for programmers im a member off"}],
+      
+  "screen_casts": [
+    { "name": "Are We Three Yet?",
+      "href": "http://www.infoq.com/presentations/Are-We-There-Yet-Rich-Hickey",
+      "description":
+        "in his keynote at JVM Languages Summit 2009, Rich Hickey advocated for the reexamination of basic principles like state, identity, value, time, types....."}
+  ]
+
 }

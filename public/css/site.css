@@ -46,6 +46,7 @@ ul {
 #navbar {
   width: 170px;
   float: left;
+  margin-bottom: 200px;
 }
 
 #navbar li {
@@ -54,5 +55,6 @@ ul {
 
 #content-bar {
   margin-top: 20px;
+  width: 680px;
   float: left;
 }
