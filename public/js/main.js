@@ -84,7 +84,7 @@
   var withNoDefaults = function(f) {
     return function(event) {
       event.preventDefault && event.preventDefault();
-      call(f);
+      f.apply(this, [event]);
       return false;
     };
   };
@@ -110,6 +110,29 @@
     
     $("#show-music").click(
       withNoDefaults(historyNavigator("music")));
+      
+    var socket = io.connect();
+    
+    $("#url-sugest").submit(withNoDefaults(function() {
+      var url = $(this).find("input[type=text]").val();
+      
+      $("#url-sugest").clearAndAdd(
+        $("<div />").css({ "background-color": "green" }).append(
+          $("<h1 />").text("Thank You")));
+
+      socket.emit("create-tip", { href: url } , function(res) {
+        console.log(res);
+        if(!res.success) {
+          $("#url-sugest")
+            .find("h1")
+              .text("Error Saving to Server")
+            .end()
+            .find("div")
+              .css("background-color", "red")
+            .end();
+        }
+      });
+    }));
   });  
 } ());
 
